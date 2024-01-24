@@ -2,6 +2,8 @@ const menuEmail = document.querySelector('.navbar-email');
 const menuCarrito = document.querySelector('.navbar-shopping-cart');
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer');
 const cardsContainer = document.querySelector('.cards-container');
+const productDetailContainer = document.querySelector('#productDetail');
+const productDetailClose = document.querySelector('.product-detail-close');
 
 const buguerMenu = document.querySelector('.menu');
 const desktopMenu = document.querySelector('.desktop-menu');
@@ -10,7 +12,7 @@ const mobileMenu = document.querySelector('.mobile-menu');
 menuEmail.addEventListener('click', toggleDesktopMenu);
 buguerMenu.addEventListener('click', toggleMobileMenu);
 menuCarrito.addEventListener('click', toggleCarroAside);
-
+productDetailClose.addEventListener('click', closeProductDetailAside);
 function toggleDesktopMenu() {
     const isAsideClosed = shoppingCartContainer.classList.contains('inactive');
 
@@ -26,6 +28,8 @@ function toggleMobileMenu() {
         if(!isAsideClosed) {
             shoppingCartContainer.classList.add('inactive');
         }
+    
+    closeProductDetailAside();
 
     mobileMenu.classList.toggle('inactive');
 }
@@ -33,6 +37,7 @@ function toggleMobileMenu() {
 function toggleCarroAside() {
     const isMobileMenuClosed = mobileMenu.classList.contains('inactive');
     const isDesktopClosed = desktopMenu.classList.contains('inactive');
+    const isProductDetailClosed = productDetailContainer.classList.contains('inactive');
     
         if(!isMobileMenuClosed) {
             mobileMenu.classList.add('inactive');
@@ -40,7 +45,19 @@ function toggleCarroAside() {
         if(!isDesktopClosed) {
             desktopMenu.classList.add('inactive');
         }
+        if(!isProductDetailClosed) {
+            productDetailContainer.classList.add('inactive');
+        }
         shoppingCartContainer.classList.toggle('inactive');
+}
+
+function openProductDetail() {
+    shoppingCartContainer.classList.add('inactive');
+    productDetailContainer.classList.remove('inactive');
+}
+
+function closeProductDetailAside() {
+    productDetailContainer.classList.add('inactive');
 }
 
 //Array list
@@ -60,11 +77,6 @@ productList.push({
     price: 123123,
     image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 });
-productList.push({
-    name: 'Pan',
-    price: 123123,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-});
 
 //La creacion de una funcion para encapsular el funcionamiento de la
 //array, ayuda mucho y para hacer funcionarla, hacemos referencia
@@ -75,6 +87,7 @@ function renderProducts(arr) {
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
+        productImg.addEventListener('click', openProductDetail)
     
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');

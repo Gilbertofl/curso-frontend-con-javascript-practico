@@ -170,7 +170,7 @@
   
   /*shoppingCartContainer*/
   #shoppingCartContainer {
-    padding: 0 10px 0 30px;
+    padding: 0 10px 0 10px;
   }
   .title-container {
     display: flex;
@@ -367,6 +367,12 @@
     .product-card img {
       width: 140px;
       height: 140px;
+    }
+    #shoppingCartContainer {
+      width: 100%;
+    }
+    #productDetail {
+      width: 100%;
     }
   }
 
